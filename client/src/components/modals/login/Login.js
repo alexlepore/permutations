@@ -39,7 +39,9 @@ export default class Login extends Component{
 
                 <Modal show={this.state.show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
-                    <Modal.Title><span style={styles.unicode}>&#128274;</span>&nbsp;Login to Permutations</Modal.Title>
+                    <Modal.Title>
+                        <span style={styles.unicode} role="img" aria-label="Lock">&#128274;</span>&nbsp;Login to Permutations
+                    </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Form>

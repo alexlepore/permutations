@@ -8,7 +8,6 @@ import Footer from "./components/footer/Footer";
 
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 export default class App extends Component{
   render(){
 

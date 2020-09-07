@@ -4,12 +4,31 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 
+import axios from "axios";
+
 export default class Register extends Component{
     constructor(props){
         super(props);
         this.state ={
-            show: false
+            show: false,
+            username: "",
+            password: ""
         }
+    }
+
+    onChange = (e) => {
+        const state = this.state
+        state[e.target.name] = e.target.value;
+        this.setState(state);
+    }
+
+    onSubmit = (e) =>{
+        e.preventDefault();
+
+        const {username, password} = this.state;
+
+        axios.post("/api/auth/register", {username, password})
+            
     }
 
     handleShow = () => {
@@ -33,6 +52,8 @@ export default class Register extends Component{
             }
         }
 
+        const {username, password} = this.state;
+
         return(
             <>
                 <Button variant="secondary" onClick={this.handleShow}>Register/Sign Up</Button>
@@ -42,23 +63,23 @@ export default class Register extends Component{
                 <Modal show={this.state.show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
                         <Modal.Title>
-                            <span style={styles.unicode}>&#128274;</span>&nbsp;Register for Permutations
+                            <span style={styles.unicode} role="img" aria-label="Lock">&#128274;</span>&nbsp;Register for Permutations
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                    <Form>
+                    <Form onSubmit={this.onSubmit}>
                         <Form.Group controlId="formBasicUsername">
                             <Form.Label>
                                 Username
                             </Form.Label>
-                            <Form.Control type="username" placeholder="Enter Username" />
+                            <Form.Control type="text" placeholder="Enter Username" value={username} name="username" onChange={this.onChange} required/>
                         </Form.Group>
 
                         <Form.Group controlId="formBasicPassword">
                             <Form.Label>
                                 Password
                             </Form.Label>
-                            <Form.Control type="password" placeholder="Password" />
+                            <Form.Control type="password" placeholder="Password" value={password} name="password" onChange={this.onChange} required/>
                         </Form.Group>
                         <Button variant="primary" type="submit">Register</Button>
                         </Form>

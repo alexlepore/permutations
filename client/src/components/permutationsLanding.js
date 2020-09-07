@@ -41,7 +41,7 @@ export default class PermutationsLanding extends Component{
                         <Image src={require("../assets/imgs/perms.jpg")} style={styles.image} className="rounded"/>
                         <div className="child" style={styles.child}>
                             <Link to="/home" style={styles.link}>
-                                <h1 className="text-white text-uppercase animate__animated animate__pulse animate__infinite display-4"><span style={styles.unicode}>&#128274;</span>Permutations</h1>
+                                <h1 className="text-white text-uppercase animate__animated animate__pulse animate__infinite display-4"><span style={styles.unicode} role="img" aria-label="Lock">&#128274;</span>Permutations</h1>
                             </Link>
                         </div>
                     </div>

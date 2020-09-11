@@ -23,6 +23,14 @@ export default class Homepage extends Component{
                     <Register />
 
                     <a href="/"><i className="fas fa-home fa-2x"></i></a>
+
+                    <Row>
+                        <Col className="text-right">
+                            <p>Username: Test</p>
+                            <p>Password: Test</p>
+                        </Col>
+                    </Row>
+
                 </Col>
             </Row>
             <Row className="h-100 align-items-center justify-content-center">
@@ -35,15 +43,6 @@ export default class Homepage extends Component{
                                 If you would like to try for yourself without signing up, please login using our company generated username and password.
                                 Once you find how much time this app will save you from storing or losing all your passwords go ahead and register.
                             </p>
-                        </Col>
-                    </Row>
-                    <br />
-                    <Row>
-                        <Col className="text-right">
-                            <p>Username: Test</p>
-                        </Col>
-                        <Col className="text-left">
-                            <p>Password: Test</p>
                         </Col>
                     </Row>
                 </Col>

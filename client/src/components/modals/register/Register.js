@@ -5,14 +5,14 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 
 import axios from "axios";
-
 export default class Register extends Component{
     constructor(props){
         super(props);
-        this.state ={
-            show: false,
+        this.state = {
             username: "",
-            password: ""
+            password: "",
+            show: false,
+            submit: false
         }
     }
 
@@ -20,15 +20,18 @@ export default class Register extends Component{
         const state = this.state
         state[e.target.name] = e.target.value;
         this.setState(state);
-    }
+      }
 
     onSubmit = (e) =>{
         e.preventDefault();
 
-        const {username, password} = this.state;
+        const { username, password } = this.state;
 
-        axios.post("/api/auth/register", {username, password})
-            
+        axios.post('/api/auth/register', { username, password })
+
+        this.setState({
+            submit: true
+        })
     }
 
     handleShow = () => {
@@ -54,6 +57,37 @@ export default class Register extends Component{
 
         const {username, password} = this.state;
 
+        const postRegister = () => {
+            if(this.state.submit){
+                return (
+                    <div style={{
+                        padding: "40px 0px 40px 0px",
+                        textAlign: "center"
+                    }}>
+                        <h2>Registration Complete</h2>
+                    </div>
+                )
+            } else {
+                return (
+                    <Form onSubmit={this.onSubmit}>
+                        <Form.Group>
+                            <Form.Label>
+                                Username
+                            </Form.Label>
+                            <Form.Control type="text" placeholder="Username" name="username" value={username} onChange={this.onChange} required/>
+                        </Form.Group>
+                        <Form.Group controlId="formBasicPassword">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control type="password" placeholder="Password" name="password" value={password} onChange={this.onChange} required/>
+                        </Form.Group>
+                        <Button variant="primary" type="submit">
+                            Register
+                        </Button>
+                    </Form>
+                )
+            }
+        }
+
         return(
             <>
                 <Button variant="secondary" onClick={this.handleShow}>Register/Sign Up</Button>
@@ -67,22 +101,7 @@ export default class Register extends Component{
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                    <Form onSubmit={this.onSubmit}>
-                        <Form.Group controlId="formBasicUsername">
-                            <Form.Label>
-                                Username
-                            </Form.Label>
-                            <Form.Control type="text" placeholder="Enter Username" value={username} name="username" onChange={this.onChange} required/>
-                        </Form.Group>
-
-                        <Form.Group controlId="formBasicPassword">
-                            <Form.Label>
-                                Password
-                            </Form.Label>
-                            <Form.Control type="password" placeholder="Password" value={password} name="password" onChange={this.onChange} required/>
-                        </Form.Group>
-                        <Button variant="primary" type="submit">Register</Button>
-                        </Form>
+                        {postRegister()}
                     </Modal.Body>
                     <Modal.Footer>
                     <Button variant="secondary" onClick={this.handleClose}>
